@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int kthFactor(int n, int k) {
+    std::vector<int> factors;
+    
+    for (int i = 1; i * i <= n; ++i) {
+        if (n % i == 0) {
+            factors.push_back(i);
+            if (i * i != n) {
+                factors.push_back(n / i);
+            }
+        }
+    }
+    
+    std::sort(factors.begin(), factors.end());
+    
+    if (k <= static_cast<int>(factors.size())) {
+        return factors[k - 1]; // 1-indexed
+    }
+    
+    return -1;
+}
+
+int main() {
+    std::cout << kthFactor(12, 3) << "\n"; // Output: 3
+    std::cout << kthFactor(1, 1)  << "\n"; // Output: 1
+    std::cout << kthFactor(12, 6) << "\n"; // Output: 12
+    std::cout << kthFactor(12, 7) << "\n"; // Output: -1
+    std::cout << kthFactor(36, 5) << "\n"; // Output: 6
+    return 0;
+}
