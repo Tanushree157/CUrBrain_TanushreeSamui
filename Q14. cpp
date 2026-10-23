@@ -1,0 +1,11 @@
+#include <vector>
+
+std::vector<int> thresholdFilter(const std::vector<int>& sales, int threshold) {
+    std::vector<int> result;
+    for (int sale : sales) {
+        if (sale >= threshold) {
+            result.push_back(sale);
+        }
+    }
+    return result;
+}
