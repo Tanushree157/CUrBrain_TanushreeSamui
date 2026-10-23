@@ -1,0 +1,26 @@
+#include <vector>
+
+int secondHighestUniqueScore(const std::vector<int>& scores) {
+    long long highest = -1;
+    long long secondHighest = -1;
+    bool hasHighest = false;
+    bool hasSecond = false;
+
+    for (int score : scores) {
+        if (!hasHighest) {
+            highest = score;
+            hasHighest = true;
+        } else if (score > highest) {
+            secondHighest = highest;
+            hasSecond = true;
+            highest = score;
+        } else if (score < highest) {
+            if (!hasSecond || score > secondHighest) {
+                secondHighest = score;
+                hasSecond = true;
+            }
+        }
+    }
+
+    return hasSecond ? secondHighest : -1;
+}
